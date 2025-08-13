@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Navigation Menu</title>
+    <link rel="stylesheet" href="stylesTask1.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav id="main-nav" class="fixed-nav">
+      <div class="nav-container">
+        <a href="#" class="brand-name">ThinkWhat</a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section id="home" data-nav-color="bg-blue-700">
+      <div class="section-content">
+        <h1>Welcome to ThinkWhat</h1>
+        <p>
+          Discover a new way of building beautiful, functional websites with creative and dynamic elements.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" data-nav-color="bg-green-700">
+      <div class="section-content">
+        <h1>About Us</h1>
+        <p>
+          We are a team of passionate creators dedicated to bringing your digital ideas to life. Our focus is on clean design and user-centric experiences.
+          With a background in web development, design, and branding, we approach every project with creativity and precision. 
+          Our collaborative process ensures that your vision is not only realized but elevated — transforming concepts into exceptional digital products.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" data-nav-color="bg-orange-700">
+      <div class="section-content">
+        <h1>Our Services</h1>
+        <p>
+          From web development to UI/UX design, we offer a range of services tailored to meet your needs and exceed your expectations.
+          Our solutions include responsive website design, mobile-first development, e-commerce integration, brand identity, content strategy, and ongoing maintenance.
+          No matter the size or scope of your project, we deliver intuitive, scalable, and results-driven outcomes that empower your business to grow.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" data-nav-color="bg-pink-700">
+      <div class="section-content">
+        <h1>Contact Us</h1>
+        <p>
+          Have a project in mind? We'd love to hear from you. Get in touch with us to start building something amazing together.
+          Whether you have a detailed plan or just an idea, we're here to listen, advise, and help you take the next step. 
+          Reach out via email, phone, or our contact form — and let's bring your vision to life with creativity, strategy, and precision.
+          Phone number: +91 1234567890
+          e-mail: thinkwhat123@gmail.com
+        </p>
+      </div>
+    </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+            const navBar = document.getElementById('main-nav');
+            const sections = document.querySelectorAll('section[data-nav-color]');
+
+            function updateNavBarColor() {
+                let currentNavColorClass = 'bg-indigo-700'; 
+
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5) {
+                        currentNavColorClass = section.dataset.navColor;
+                    }
+                });
+                const allColorClasses = Array.from(sections).map(s => s.dataset.navColor);
+                allColorClasses.forEach(colorClass => {
+                    if (colorClass) navBar.classList.remove(colorClass);
+                });
+                navBar.classList.add(currentNavColorClass);
+            }
+            window.addEventListener('scroll', updateNavBarColor);
+            updateNavBarColor();
+        });
+    </script>
+</body>
+</html>
